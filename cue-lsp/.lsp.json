@@ -1,0 +1,9 @@
+{
+  "cue": {
+    "command": "cue",
+    "args": ["lsp", "serve"],
+    "extensionToLanguage": {
+      ".cue": "cue"
+    }
+  }
+}

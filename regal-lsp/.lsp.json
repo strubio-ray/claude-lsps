@@ -1,0 +1,9 @@
+{
+  "rego": {
+    "command": "regal",
+    "args": ["language-server"],
+    "extensionToLanguage": {
+      ".rego": "rego"
+    }
+  }
+}
