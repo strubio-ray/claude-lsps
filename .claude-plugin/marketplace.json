@@ -1,13 +1,21 @@
 {
-  "repository": "https://github.com/strubio-ray/claude-lsps",
-  "owner": "strubio-ray",
-  "license": "MIT",
-  "version": "1.0.0",
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-lsps",
+  "metadata": {
+    "description": "CUE and Rego LSP plugins for Claude Code",
+    "version": "1.0.0",
+    "license": "MIT",
+    "repository": "https://github.com/strubio-ray/claude-lsps",
+    "homepage": "https://github.com/strubio-ray/claude-lsps"
+  },
+  "owner": {
+    "name": "strubio-ray"
+  },
   "plugins": [
     {
       "name": "cue-lsp",
       "version": "1.0.0",
-      "source": "./cue-lsp/",
+      "source": "./cue-lsp",
       "description": "CUE language server",
       "category": "development",
       "tags": ["cue", "lsp"],
@@ -18,7 +26,7 @@
     {
       "name": "regal-lsp",
       "version": "1.0.0",
-      "source": "./regal-lsp/",
+      "source": "./regal-lsp",
       "description": "Rego linter and language server",
       "category": "development",
       "tags": ["rego", "opa", "lsp"],
