@@ -2,7 +2,7 @@
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "claude-lsps",
   "metadata": {
-    "description": "CUE and Rego LSP plugins for Claude Code",
+    "description": "LSP plugins for Claude Code",
     "version": "1.0.0",
     "license": "MIT",
     "repository": "https://github.com/strubio-ray/claude-lsps",
@@ -12,6 +12,17 @@
     "name": "strubio-ray"
   },
   "plugins": [
+    {
+      "name": "bash-language-server",
+      "version": "1.0.0",
+      "source": "./bash-language-server",
+      "description": "Bash language server",
+      "category": "development",
+      "tags": ["bash", "shell", "lsp"],
+      "author": {
+        "name": "strubio-ray"
+      }
+    },
     {
       "name": "cue-lsp",
       "version": "1.0.0",
@@ -24,12 +35,34 @@
       }
     },
     {
+      "name": "pyright",
+      "version": "1.0.0",
+      "source": "./pyright",
+      "description": "Python language server",
+      "category": "development",
+      "tags": ["python", "lsp"],
+      "author": {
+        "name": "strubio-ray"
+      }
+    },
+    {
       "name": "regal-lsp",
       "version": "1.0.0",
       "source": "./regal-lsp",
       "description": "Rego linter and language server",
       "category": "development",
       "tags": ["rego", "opa", "lsp"],
+      "author": {
+        "name": "strubio-ray"
+      }
+    },
+    {
+      "name": "yaml-language-server",
+      "version": "1.0.0",
+      "source": "./yaml-language-server",
+      "description": "YAML language server",
+      "category": "development",
+      "tags": ["yaml", "lsp"],
       "author": {
         "name": "strubio-ray"
       }

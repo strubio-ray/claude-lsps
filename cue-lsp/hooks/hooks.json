@@ -7,7 +7,7 @@
           {
             "type": "command",
             "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/check-cue.sh",
-            "timeout": 30
+            "timeout": 60
           }
         ]
       }

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Check/install CUE CLI for Claude Code LSP plugin
+# Check/install pyright for Claude Code LSP plugin
 
-BINARY="cue"
-FORMULA="cue-lang/tap/cue"
+BINARY="pyright-langserver"
+FORMULA="pyright"
 LOCK_FILE="/tmp/claude-lsp-brew.lock"
 LOCK_TIMEOUT=120
 

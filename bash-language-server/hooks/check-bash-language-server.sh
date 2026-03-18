@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Check/install CUE CLI for Claude Code LSP plugin
+# Check/install bash-language-server for Claude Code LSP plugin
 
-BINARY="cue"
-FORMULA="cue-lang/tap/cue"
+BINARY="bash-language-server"
+FORMULA="bash-language-server"
 LOCK_FILE="/tmp/claude-lsp-brew.lock"
 LOCK_TIMEOUT=120
 

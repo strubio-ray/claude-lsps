@@ -1,12 +1,12 @@
 {
-  "description": "Check for Regal installation on session start",
+  "description": "Check for bash-language-server installation on session start",
   "hooks": {
     "SessionStart": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/check-regal.sh",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/check-bash-language-server.sh",
             "timeout": 60
           }
         ]
