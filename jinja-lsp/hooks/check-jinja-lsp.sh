@@ -2,7 +2,7 @@
 # Check/install jinja-lsp for Claude Code LSP plugin
 
 BINARY="jinja-lsp"
-GIT_REPO="git@github.com:uros-5/jinja-lsp.git"
+GIT_REPO="ssh://git@github.com/uros-5/jinja-lsp.git"
 LOCK_FILE="/tmp/claude-lsp-cargo.lock"
 LOCK_TIMEOUT=300
 
