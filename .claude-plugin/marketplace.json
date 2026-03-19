@@ -13,12 +13,34 @@
   },
   "plugins": [
     {
+      "name": "ansible-language-server",
+      "version": "1.0.0",
+      "source": "./ansible-language-server",
+      "description": "Ansible language server",
+      "category": "development",
+      "tags": ["ansible", "yaml", "lsp"],
+      "author": {
+        "name": "strubio-ray"
+      }
+    },
+    {
       "name": "bash-language-server",
       "version": "1.0.0",
       "source": "./bash-language-server",
       "description": "Bash language server",
       "category": "development",
       "tags": ["bash", "shell", "lsp"],
+      "author": {
+        "name": "strubio-ray"
+      }
+    },
+    {
+      "name": "jinja-lsp",
+      "version": "1.0.0",
+      "source": "./jinja-lsp",
+      "description": "Jinja2 template language server",
+      "category": "development",
+      "tags": ["jinja", "jinja2", "templates", "lsp"],
       "author": {
         "name": "strubio-ray"
       }

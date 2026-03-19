@@ -1,0 +1,11 @@
+{
+  "jinja": {
+    "command": "jinja-lsp",
+    "args": [],
+    "extensionToLanguage": {
+      ".jinja": "jinja",
+      ".jinja2": "jinja",
+      ".j2": "jinja"
+    }
+  }
+}
