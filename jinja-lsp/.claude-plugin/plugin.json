@@ -1,7 +1,7 @@
 {
   "name": "jinja-lsp",
   "description": "Jinja2 template language server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": {
     "name": "strubio-ray"
   },
