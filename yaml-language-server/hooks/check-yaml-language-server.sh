@@ -67,23 +67,3 @@ if ! command -v "$BINARY" &>/dev/null; then
   echo "[$BINARY] Not in PATH after install. Install manually: brew install $FORMULA"
   exit 1
 fi
-
-# --- Phase 2: Generate LSP proxy wrapper (runs every session) ---
-PROXY_NAME="yaml-lsp-proxy"
-PROXY_DIR="${HOME}/.local/bin"
-PROXY_SCRIPT="${PROXY_DIR}/${PROXY_NAME}"
-MARKETPLACE_ROOT="$(cd "${CLAUDE_PLUGIN_ROOT}/.." && pwd)"
-LIB_PROXY="${MARKETPLACE_ROOT}/lib/lsp-proxy.js"
-CONFIG_FILE="${CLAUDE_PLUGIN_ROOT}/proxy.json"
-
-if [ -f "$LIB_PROXY" ] && [ -f "$CONFIG_FILE" ]; then
-  mkdir -p "$PROXY_DIR"
-  cat > "$PROXY_SCRIPT" <<WRAPPER
-#!/bin/sh
-exec node "${LIB_PROXY}" --config "${CONFIG_FILE}" "\$@"
-WRAPPER
-  chmod +x "$PROXY_SCRIPT"
-  if ! command -v "$PROXY_NAME" &>/dev/null; then
-    echo "[$PROXY_NAME] Warning: ${PROXY_DIR} is not on PATH"
-  fi
-fi

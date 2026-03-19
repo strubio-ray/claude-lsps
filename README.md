@@ -6,13 +6,13 @@ LSP plugins for [Claude Code](https://claude.ai/code).
 
 | Plugin | LSP Server | Description |
 |--------|-----------|-------------|
-| `ansible-language-server` | `ansible-lsp-proxy` | Ansible language server (with LSP method compatibility proxy) |
+| `ansible-language-server` | `node lib/lsp-proxy.js` | Ansible language server (with LSP method compatibility proxy) |
 | `bash-language-server` | `bash-language-server start` | Bash/Shell language server |
 | `cue-lsp` | `cue lsp serve` | CUE language server (built into CUE CLI) |
 | `jinja-lsp` | `jinja-lsp` | Jinja2 template language server |
 | `pyright` | `pyright-langserver --stdio` | Python type checker and language server |
 | `regal-lsp` | `regal language-server` | Rego linter and language server |
-| `yaml-language-server` | `yaml-lsp-proxy` | YAML language server (with LSP method compatibility proxy) |
+| `yaml-language-server` | `node lib/lsp-proxy.js` | YAML language server (with LSP method compatibility proxy) |
 
 ## Installation
 
@@ -22,7 +22,7 @@ Each plugin includes a SessionStart hook that automatically installs the LSP bin
 
 ## LSP Proxy
 
-The `ansible-language-server` and `yaml-language-server` plugins use a shared LSP proxy (`lib/lsp-proxy.js`) that intercepts requests for unsupported methods. This prevents Claude Code's LSP client from entering a broken state when a server returns a JSON-RPC `-32601` error. Each plugin defines its blocked methods in a `proxy.json` file; a thin shell wrapper in `~/.local/bin/` is generated at session start by the plugin's hook script.
+The `ansible-language-server` and `yaml-language-server` plugins use a shared LSP proxy (`lib/lsp-proxy.js`) that intercepts requests for unsupported methods. This prevents Claude Code's LSP client from entering a broken state when a server returns a JSON-RPC `-32601` error. Each plugin defines its blocked methods in a `proxy.json` file. The proxy is launched directly via `node` using `${CLAUDE_PLUGIN_ROOT}` path expansion in `.lsp.json` — no generated wrappers or PATH dependencies required.
 
 ## License
 
