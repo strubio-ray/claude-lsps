@@ -8,14 +8,22 @@ if command -v "$BINARY" &>/dev/null; then
   exit 0
 fi
 
-# Determine install method: Homebrew first, binary download fallback
-if command -v brew &>/dev/null; then
-  INSTALL_METHOD="brew"
-  LOCK_FILE="/tmp/claude-lsp-brew.lock"
-else
-  INSTALL_METHOD="binary"
-  LOCK_FILE="/tmp/claude-lsp-binary.lock"
-fi
+# Determine install method: Homebrew on macOS, binary download on Linux
+case "$(uname -s)" in
+  Darwin)
+    if command -v brew &>/dev/null; then
+      INSTALL_METHOD="brew"
+      LOCK_FILE="/tmp/claude-lsp-brew.lock"
+    else
+      INSTALL_METHOD="binary"
+      LOCK_FILE="/tmp/claude-lsp-binary.lock"
+    fi
+    ;;
+  *)
+    INSTALL_METHOD="binary"
+    LOCK_FILE="/tmp/claude-lsp-binary.lock"
+    ;;
+esac
 
 LOCK_TIMEOUT=120
 
