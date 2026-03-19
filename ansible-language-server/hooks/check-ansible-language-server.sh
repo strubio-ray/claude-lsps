@@ -50,3 +50,16 @@ if ! command -v "$BINARY" &>/dev/null; then
   echo "[$FORMULA] Not in PATH after install. Install manually: brew install $FORMULA"
   exit 1
 fi
+
+# Install LSP proxy symlink
+PROXY_SRC="${CLAUDE_PLUGIN_ROOT}/bin/ansible-lsp-proxy.js"
+PROXY_DIR="${HOME}/.local/bin"
+PROXY_DST="${PROXY_DIR}/ansible-lsp-proxy"
+
+if [ -f "$PROXY_SRC" ]; then
+  mkdir -p "$PROXY_DIR"
+  ln -sf "$PROXY_SRC" "$PROXY_DST"
+  if ! command -v ansible-lsp-proxy &>/dev/null; then
+    echo "[ansible-lsp-proxy] Warning: ${PROXY_DIR} is not on PATH"
+  fi
+fi

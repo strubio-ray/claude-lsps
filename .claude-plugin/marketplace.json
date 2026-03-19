@@ -14,7 +14,7 @@
   "plugins": [
     {
       "name": "ansible-language-server",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "source": "./ansible-language-server",
       "description": "Ansible language server",
       "category": "development",

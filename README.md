@@ -6,7 +6,7 @@ LSP plugins for [Claude Code](https://claude.ai/code).
 
 | Plugin | LSP Server | Description |
 |--------|-----------|-------------|
-| `ansible-language-server` | `ansible-language-server --stdio` | Ansible language server |
+| `ansible-language-server` | `ansible-lsp-proxy` | Ansible language server (with LSP method compatibility proxy) |
 | `bash-language-server` | `bash-language-server start` | Bash/Shell language server |
 | `cue-lsp` | `cue lsp serve` | CUE language server (built into CUE CLI) |
 | `jinja-lsp` | `jinja-lsp` | Jinja2 template language server |
