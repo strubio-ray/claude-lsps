@@ -1,0 +1,11 @@
+{
+  "server": ["yaml-language-server", "--stdio"],
+  "blocked": [
+    "textDocument/references",
+    "textDocument/implementation",
+    "textDocument/prepareCallHierarchy",
+    "textDocument/callHierarchyIncomingCalls",
+    "textDocument/callHierarchyOutgoingCalls",
+    "workspace/symbol"
+  ]
+}

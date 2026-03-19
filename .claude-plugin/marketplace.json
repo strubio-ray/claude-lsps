@@ -14,7 +14,7 @@
   "plugins": [
     {
       "name": "ansible-language-server",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "source": "./ansible-language-server",
       "description": "Ansible language server",
       "category": "development",
@@ -80,7 +80,7 @@
     },
     {
       "name": "yaml-language-server",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "source": "./yaml-language-server",
       "description": "YAML language server",
       "category": "development",

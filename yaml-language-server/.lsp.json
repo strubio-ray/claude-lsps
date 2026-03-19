@@ -1,7 +1,7 @@
 {
   "yaml": {
-    "command": "yaml-language-server",
-    "args": ["--stdio"],
+    "command": "yaml-lsp-proxy",
+    "args": [],
     "extensionToLanguage": {
       ".yaml": "yaml",
       ".yml": "yaml"

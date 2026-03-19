@@ -1,0 +1,12 @@
+{
+  "server": ["ansible-language-server", "--stdio"],
+  "blocked": [
+    "textDocument/documentSymbol",
+    "textDocument/references",
+    "textDocument/implementation",
+    "textDocument/prepareCallHierarchy",
+    "textDocument/callHierarchyIncomingCalls",
+    "textDocument/callHierarchyOutgoingCalls",
+    "workspace/symbol"
+  ]
+}
