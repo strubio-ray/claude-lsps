@@ -12,6 +12,7 @@ LSP plugins for [Claude Code](https://claude.ai/code).
 | `jinja-lsp` | `jinja-lsp` | Jinja2 template language server |
 | `pyright` | `pyright-langserver --stdio` | Python type checker and language server |
 | `regal-lsp` | `regal language-server` | Rego linter and language server |
+| `vtsls` | `vtsls --stdio` | TypeScript/JavaScript language server |
 | `yaml-language-server` | `node lib/lsp-proxy.js` | YAML language server (with LSP method compatibility proxy) |
 
 ## Installation
