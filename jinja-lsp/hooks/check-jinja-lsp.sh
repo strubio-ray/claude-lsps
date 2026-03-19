@@ -25,7 +25,7 @@ fi
 # Serialized cargo install (flock with mkdir fallback for macOS)
 do_install() {
   echo "[$BINARY] Installing via Cargo (SSH)..."
-  if cargo install --git "$GIT_REPO" --package "$BINARY"; then
+  if cargo install --git "$GIT_REPO" "$BINARY"; then
     echo "[$BINARY] Installed successfully"
   else
     echo "[$BINARY] cargo install failed"
