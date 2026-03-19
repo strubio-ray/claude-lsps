@@ -10,9 +10,16 @@ if command -v "$BINARY" &>/dev/null; then
   exit 0
 fi
 
+# Auto-install Rust toolchain if missing
 if ! command -v cargo &>/dev/null; then
-  echo "[$BINARY] Rust/Cargo not found. Install via rustup: https://rustup.rs"
-  exit 1
+  echo "[$BINARY] Rust/Cargo not found. Installing via rustup..."
+  if curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y; then
+    . "$HOME/.cargo/env"
+  fi
+  if ! command -v cargo &>/dev/null; then
+    echo "[$BINARY] Failed to install Rust. Install manually: https://rustup.rs"
+    exit 1
+  fi
 fi
 
 # Serialized cargo install (flock with mkdir fallback for macOS)

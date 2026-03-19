@@ -3,32 +3,50 @@
 
 BINARY="ansible-language-server"
 FORMULA="ansible-language-server"
-LOCK_FILE="/tmp/claude-lsp-brew.lock"
-LOCK_TIMEOUT=120
+NPM_PACKAGE="@ansible/ansible-language-server"
 
 if command -v "$BINARY" &>/dev/null; then
   exit 0
 fi
 
-if ! command -v brew &>/dev/null; then
-  echo "[$FORMULA] Homebrew not found. Install: https://brew.sh"
+# Determine install method: Homebrew first, npm fallback
+if command -v brew &>/dev/null; then
+  INSTALL_METHOD="brew"
+  LOCK_FILE="/tmp/claude-lsp-brew.lock"
+elif command -v npm &>/dev/null; then
+  INSTALL_METHOD="npm"
+  LOCK_FILE="/tmp/claude-lsp-npm.lock"
+else
+  echo "[$BINARY] Neither Homebrew nor npm found. Install one of them first."
   exit 1
 fi
 
-# Serialized brew install (flock with mkdir fallback for macOS)
+LOCK_TIMEOUT=120
+
 do_install() {
-  echo "[$FORMULA] Installing via Homebrew..."
-  if brew install "$FORMULA"; then
-    echo "[$FORMULA] Installed successfully"
+  if [ "$INSTALL_METHOD" = "brew" ]; then
+    echo "[$BINARY] Installing via Homebrew..."
+    if brew install "$FORMULA"; then
+      echo "[$BINARY] Installed successfully"
+    else
+      echo "[$BINARY] brew install failed"
+      return 1
+    fi
   else
-    echo "[$FORMULA] brew install failed"
-    return 1
+    echo "[$BINARY] Installing via npm..."
+    if npm install -g "$NPM_PACKAGE"; then
+      echo "[$BINARY] Installed successfully"
+    else
+      echo "[$BINARY] npm install failed"
+      return 1
+    fi
   fi
 }
 
+# Serialized install (flock with mkdir fallback for macOS)
 if command -v flock &>/dev/null; then
   (
-    flock --timeout "$LOCK_TIMEOUT" 9 || { echo "[$FORMULA] Lock timeout"; exit 1; }
+    flock --timeout "$LOCK_TIMEOUT" 9 || { echo "[$BINARY] Lock timeout"; exit 1; }
     command -v "$BINARY" &>/dev/null && exit 0
     do_install
   ) 9>"$LOCK_FILE"
@@ -36,7 +54,7 @@ else
   waited=0
   while ! mkdir "$LOCK_FILE.d" 2>/dev/null; do
     if (( waited >= LOCK_TIMEOUT )); then
-      echo "[$FORMULA] Lock timeout"
+      echo "[$BINARY] Lock timeout"
       exit 1
     fi
     sleep 2
@@ -47,7 +65,7 @@ else
 fi
 
 if ! command -v "$BINARY" &>/dev/null; then
-  echo "[$FORMULA] Not in PATH after install. Install manually: brew install $FORMULA"
+  echo "[$BINARY] Not in PATH after install. Install manually: brew install $FORMULA"
   exit 1
 fi
 
