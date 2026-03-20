@@ -1,14 +1,16 @@
 {
   "yaml": {
-    "command": "node",
+    "command": "bash",
     "args": [
-      "${CLAUDE_PLUGIN_ROOT}/../lib/lsp-proxy.js",
-      "--config",
+      "${CLAUDE_PLUGIN_ROOT}/../lib/yaml-or-ansible-wrapper.sh",
+      "--mode=yaml",
       "${CLAUDE_PLUGIN_ROOT}/proxy.json"
     ],
     "extensionToLanguage": {
       ".yaml": "yaml",
       ".yml": "yaml"
-    }
+    },
+    "restartOnCrash": false,
+    "maxRestarts": 0
   }
 }
