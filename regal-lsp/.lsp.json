@@ -1,7 +1,7 @@
 {
   "rego": {
-    "command": "regal",
-    "args": ["language-server"],
+    "command": "node",
+    "args": ["${CLAUDE_PLUGIN_ROOT}/lsp-proxy.js", "--config", "${CLAUDE_PLUGIN_ROOT}/proxy.json"],
     "extensionToLanguage": {
       ".rego": "rego"
     }

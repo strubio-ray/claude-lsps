@@ -1,0 +1,11 @@
+{
+  "server": ["regal", "language-server"],
+  "blocked": [
+    "textDocument/references",
+    "textDocument/implementation"
+  ],
+  "warmup": {
+    "extensions": [".rego"],
+    "exclude": ["node_modules", ".git", "vendor", ".venv", ".claude"]
+  }
+}
