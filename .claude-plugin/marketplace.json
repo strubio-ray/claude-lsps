@@ -35,17 +35,6 @@
       }
     },
     {
-      "name": "jinja-lsp",
-      "version": "1.0.0",
-      "source": "./jinja-lsp",
-      "description": "Jinja2 template language server",
-      "category": "development",
-      "tags": ["jinja", "jinja2", "templates", "lsp"],
-      "author": {
-        "name": "strubio-ray"
-      }
-    },
-    {
       "name": "cue-lsp",
       "version": "1.0.0",
       "source": "./cue-lsp",

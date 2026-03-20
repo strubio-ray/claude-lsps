@@ -9,7 +9,6 @@ LSP plugins for [Claude Code](https://claude.ai/code).
 | `ansible-language-server` | `node lib/lsp-proxy.js` | Ansible language server (with LSP method compatibility proxy) |
 | `bash-language-server` | `bash-language-server start` | Bash/Shell language server |
 | `cue-lsp` | `cue lsp serve` | CUE language server (built into CUE CLI) |
-| `jinja-lsp` | `jinja-lsp` | Jinja2 template language server |
 | `pyright` | `pyright-langserver --stdio` | Python type checker and language server |
 | `regal-lsp` | `regal language-server` | Rego linter and language server |
 | `vtsls` | `vtsls --stdio` | TypeScript/JavaScript language server |
@@ -19,7 +18,7 @@ LSP plugins for [Claude Code](https://claude.ai/code).
 
 Add this marketplace to your Claude Code plugins configuration, then install individual plugins.
 
-Each plugin includes a SessionStart hook that automatically installs the LSP binary if it is not already available. Most plugins install via Homebrew; `jinja-lsp` installs via Cargo. Concurrent installs are serialized with `flock` to prevent lock conflicts.
+Each plugin includes a SessionStart hook that automatically installs the LSP binary if it is not already available. Most plugins install via Homebrew. Concurrent installs are serialized with `flock` to prevent lock conflicts.
 
 ## Plugin Notes
 
