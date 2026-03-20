@@ -1,11 +1,7 @@
 {
   "ansible": {
-    "command": "node",
-    "args": [
-      "${CLAUDE_PLUGIN_ROOT}/lsp-proxy.js",
-      "--config",
-      "${CLAUDE_PLUGIN_ROOT}/proxy.json"
-    ],
+    "command": "ansible-language-server",
+    "args": ["--stdio"],
     "extensionToLanguage": {
       ".yaml": "ansible",
       ".yml": "ansible"
