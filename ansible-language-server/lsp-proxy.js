@@ -69,8 +69,72 @@ const child = spawn(SERVER_CMD, SERVER_ARGS, {
   stdio: ["pipe", "pipe", "inherit"],
 });
 
-// Server→client: pipe raw bytes, no parsing needed.
-child.stdout.pipe(process.stdout);
+// Server→client: parse messages, auto-respond to server-initiated requests
+// that Claude Code's LSP client does not handle (e.g. client/registerCapability).
+// These are JSON-RPC requests FROM the server (they have an "id" and "method").
+// If the client never responds, the server may deadlock or misbehave.
+
+const SERVER_REQUESTS_AUTO_RESPOND = new Set([
+  "client/registerCapability",
+  "client/unregisterCapability",
+  "workspace/configuration",
+  "window/workDoneProgress/create",
+]);
+
+let serverBuffer = Buffer.alloc(0);
+
+child.stdout.on("data", (chunk) => {
+  serverBuffer = Buffer.concat([serverBuffer, chunk]);
+  drainServerBuffer();
+});
+
+function drainServerBuffer() {
+  while (true) {
+    const delimIdx = serverBuffer.indexOf(HEADER_DELIM);
+    if (delimIdx === -1) return;
+
+    const header = serverBuffer.subarray(0, delimIdx).toString("ascii");
+    const match = CONTENT_LENGTH_RE.exec(header);
+    if (!match) {
+      process.stdout.write(serverBuffer);
+      serverBuffer = Buffer.alloc(0);
+      return;
+    }
+
+    const contentLength = parseInt(match[1], 10);
+    const bodyStart = delimIdx + HEADER_DELIM.length;
+    const messageEnd = bodyStart + contentLength;
+
+    if (serverBuffer.length < messageEnd) return;
+
+    const rawMessage = serverBuffer.subarray(0, messageEnd);
+    const bodyBytes = serverBuffer.subarray(bodyStart, messageEnd);
+    serverBuffer = serverBuffer.subarray(messageEnd);
+
+    let msg;
+    try {
+      msg = JSON.parse(bodyBytes.toString("utf8"));
+    } catch {
+      process.stdout.write(rawMessage);
+      continue;
+    }
+
+    if (
+      msg.id !== undefined &&
+      msg.method &&
+      SERVER_REQUESTS_AUTO_RESPOND.has(msg.method)
+    ) {
+      // Auto-respond to the server so it doesn't block waiting for the client.
+      const ack = JSON.stringify({ jsonrpc: "2.0", id: msg.id, result: null });
+      writeMessage(child.stdin, ack);
+      // Don't forward to client — it can't handle these.
+      continue;
+    }
+
+    // Forward everything else to the client.
+    process.stdout.write(rawMessage);
+  }
+}
 
 child.on("error", (err) => {
   process.stderr.write(`${LOG_PREFIX} child error: ${err.message}\n`);
