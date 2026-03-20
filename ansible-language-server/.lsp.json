@@ -1,16 +1,10 @@
 {
   "ansible": {
-    "command": "bash",
-    "args": [
-      "${CLAUDE_PLUGIN_ROOT}/yaml-or-ansible-wrapper.sh",
-      "--mode=ansible",
-      "${CLAUDE_PLUGIN_ROOT}/proxy.json"
-    ],
+    "command": "ansible-language-server",
+    "args": ["--stdio"],
     "extensionToLanguage": {
       ".yaml": "ansible",
       ".yml": "ansible"
-    },
-    "restartOnCrash": false,
-    "maxRestarts": 0
+    }
   }
 }
