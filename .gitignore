@@ -1,0 +1,15 @@
+# BEGIN agent-sandbox managed
+.DS_Store
+.vagrant/
+justfile
+Vagrantfile
+.workmux.yaml
+.vm/*
+!.vm/provision.sh
+!.vm/shared-dirs.yml
+!.vm/shared-files.yml
+!.vm/CLAUDE.vm.md
+!.vm/overlay-dirs.yml
+!.vm/worktree-files.yml
+!.vm/worktree-setup.sh
+# END agent-sandbox managed

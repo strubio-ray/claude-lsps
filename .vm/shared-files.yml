@@ -1,0 +1,59 @@
+# Shared Files Configuration (shared-files.yml)
+#
+# ON-BOOT COPY: Files copied via Vagrant file provisioner on `vagrant up`.
+# No live sync - edit the source file and run `vagrant up` again to update.
+#
+# Format:
+#   files:
+#     - source: <host-path>           # Supports ~ expansion
+#       destination: <vm-path>        # Absolute path in VM
+#
+# Missing files are skipped with a warning (won't fail vagrant up).
+# Files are owned by vagrant user after copy.
+#
+# =============================================================================
+# SECURITY WARNING
+# =============================================================================
+# Only copy files you explicitly need. NEVER copy:
+#
+#   ~/.ssh/*                - SSH keys
+#   ~/.aws/*                - AWS credentials
+#   ~/.gnupg/*              - GPG keys
+#   ~/.netrc                - FTP/HTTP credentials
+#   ~/.npmrc                - npm tokens (if contains authToken)
+#   Any file with secrets, tokens, or API keys
+#
+# The VM agent can read anything you copy.
+# =============================================================================
+
+files:
+  # Other Examples:
+  # =============================================================================
+  # Shell Configuration
+  # =============================================================================
+  # Note: The VM has its own .bashrc with tmux, etc. configured.
+  # You may want to copy aliases separately to avoid conflicts.
+  #
+  # - source: ~/.bash_aliases
+  #   destination: /home/vagrant/.bash_aliases
+
+  # =============================================================================
+  # Editor Configuration
+  # =============================================================================
+  # - source: ~/.vimrc
+  #   destination: /home/vagrant/.vimrc
+  #
+  # - source: ~/.nanorc
+  #   destination: /home/vagrant/.nanorc
+
+  # =============================================================================
+  # tmux Configuration
+  # =============================================================================
+  # - source: ~/.tmux.conf
+  #   destination: /home/vagrant/.tmux.conf
+
+  # =============================================================================
+  # Readline Configuration
+  # =============================================================================
+  # - source: ~/.inputrc
+  #   destination: /home/vagrant/.inputrc

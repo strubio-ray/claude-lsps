@@ -1,0 +1,21 @@
+# Worktree Files Configuration (worktree-files.yml)
+#
+# Files copied from main worktree to linked worktrees on `workmux add`.
+# Each worktree gets an independent copy it can modify freely.
+#
+# Paths are relative to the project root (not absolute).
+#
+# Format:
+#   files:
+#     - source: <project-relative-path>
+#       destination: <project-relative-path>   # Optional, defaults to source
+#
+# Missing files are skipped with a warning (won't fail worktree creation).
+#
+# Examples:
+#   files:
+#     - source: .env
+#     - source: config/version.xcconfig
+#       destination: config/version.xcconfig
+
+files: []

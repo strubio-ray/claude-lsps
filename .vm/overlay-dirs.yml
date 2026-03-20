@@ -1,0 +1,44 @@
+# Overlay Directories Configuration (overlay-dirs.yml)
+#
+# Paths listed here get VM-local bind mounts, isolating OS-specific
+# artifacts (node_modules, venv, target) from the shared filesystem.
+#
+# Format:
+#   paths:
+#     - relative/path    # Relative to /vm-claude-lsps
+#
+# After changes, run: vagrant reload
+# =============================================================================
+
+paths: []
+
+# Examples:
+#
+# Node.js project:
+#   paths:
+#     - node_modules
+#
+# Node.js monorepo:
+#   paths:
+#     - node_modules
+#     - packages/api/node_modules
+#     - packages/web/node_modules
+#
+# Python project:
+#   paths:
+#     - venv
+#     - .venv
+#
+# Rust project:
+#   paths:
+#     - target
+#
+# Go project:
+#   paths:
+#     - vendor
+#
+# Multiple languages:
+#   paths:
+#     - node_modules
+#     - venv
+#     - target

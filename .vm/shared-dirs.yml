@@ -1,0 +1,62 @@
+# Shared Directories Configuration (shared-dirs.yml)
+#
+# Directories listed here are mounted via VirtualBox synced_folder,
+# providing LIVE synchronization between host and VM.
+#
+# Changes on the host are immediately visible in the VM (and vice versa for rw mode).
+#
+# Format:
+#   dirs:
+#     - source: <host-path>           # Supports ~ expansion
+#       destination: <vm-path>        # Absolute path in VM
+#       mode: ro                      # ro (default) or rw
+#
+# Missing directories are skipped with a warning (won't fail vagrant up).
+#
+# SECURITY WARNING:
+#   Only mount directories you explicitly need. NEVER mount:
+#   - ~/.ssh           (SSH keys)
+#   - ~/.aws           (AWS credentials)
+#   - ~/.gnupg         (GPG keys)
+#   - ~/.kube          (Kubernetes configs)
+#
+# The VM agent can read (and write, if mode: rw) anything you mount.
+# =============================================================================
+
+dirs:
+
+  # GitHub CLI auth: handled via GH_TOKEN env var (extracted from host's
+  # gh CLI on vagrant up). Mounting ~/.config/gh read-only breaks gh CLI
+  # (it requires write access to config.yml). To share gh settings:
+  #   - source: ~/.config/gh
+  #     destination: /home/vagrant/.config/gh
+  #     mode: rw
+
+
+  # Other Examples:
+  # =============================================================================
+  # Shared Code Libraries
+  # =============================================================================
+  # Mount shared libraries or utilities the VM agent might need.
+  #
+  # - source: ~/code/shared-utils
+  #   destination: /home/vagrant/shared-utils
+  #   mode: ro
+
+  # =============================================================================
+  # Output Directories (Bidirectional)
+  # =============================================================================
+  # For directories where the VM needs to write files back to the host.
+  #
+  # - source: ~/projects/agent-output
+  #   destination: /home/vagrant/output
+  #   mode: rw
+
+  # =============================================================================
+  # Development Tools Config
+  # =============================================================================
+  # Share tool configurations (be selective - don't share credentials).
+  #
+  # - source: ~/.config/nvim
+  #   destination: /home/vagrant/.config/nvim
+  #   mode: ro
