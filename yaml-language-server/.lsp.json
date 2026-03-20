@@ -2,7 +2,7 @@
   "yaml": {
     "command": "bash",
     "args": [
-      "${CLAUDE_PLUGIN_ROOT}/../lib/yaml-or-ansible-wrapper.sh",
+      "${CLAUDE_PLUGIN_ROOT}/yaml-or-ansible-wrapper.sh",
       "--mode=yaml",
       "${CLAUDE_PLUGIN_ROOT}/proxy.json"
     ],
