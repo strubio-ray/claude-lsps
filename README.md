@@ -23,6 +23,24 @@ Each plugin includes a SessionStart hook that automatically installs the LSP bin
 
 ## Plugin Notes
 
+### pyright
+
+Pyright auto-discovers a `.venv` in the project root, but projects that install dependencies via `uv run --with` (ephemeral injection) or `uv tool` won't have them visible to Pyright by default. To fix `reportMissingImports` errors, add a `pyrightconfig.json` at the project root pointing to your venv:
+
+```json
+{
+  "venvPath": ".",
+  "venv": ".venv"
+}
+```
+
+If you don't have a `.venv` yet, create one with the dependencies your scripts need:
+
+```bash
+uv venv
+uv pip install ruamel.yaml  # or whatever your scripts import
+```
+
 ### regal-lsp
 
 If your Rego policy files live in a subdirectory (e.g., `policy/`) rather than at the project root, the Regal language server needs a `project.roots` entry in `.regal/config.yaml` to resolve cross-file imports (like `import data.zone_isolation` in test files). Without this, the LSP reports false `unresolved-import` and `opa-fmt` errors because it can't find sibling packages.
