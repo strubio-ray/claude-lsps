@@ -12,7 +12,6 @@ LSP plugins for [Claude Code](https://claude.ai/code).
 | `pyright` | `pyright-langserver --stdio` | Python type checker and language server |
 | `regal-lsp` | `regal language-server` | Rego linter and language server |
 | `vtsls` | `vtsls --stdio` | TypeScript/JavaScript language server |
-| `yaml-language-server` | `node lib/lsp-proxy.js` | YAML language server (with LSP method compatibility proxy) |
 
 ## Installation
 
@@ -55,7 +54,7 @@ project:
 
 ## LSP Proxy
 
-The `ansible-language-server` and `yaml-language-server` plugins use a shared LSP proxy (`lib/lsp-proxy.js`) that intercepts requests for unsupported methods. This prevents Claude Code's LSP client from entering a broken state when a server returns a JSON-RPC `-32601` error. Each plugin defines its blocked methods in a `proxy.json` file. The proxy is launched directly via `node` using `${CLAUDE_PLUGIN_ROOT}` path expansion in `.lsp.json` — no generated wrappers or PATH dependencies required.
+The `ansible-language-server` plugin uses an LSP proxy (`lsp-proxy.js`) that intercepts requests for unsupported methods. This prevents Claude Code's LSP client from entering a broken state when a server returns a JSON-RPC `-32601` error. The plugin defines its blocked methods in a `proxy.json` file. The proxy is launched directly via `node` using `${CLAUDE_PLUGIN_ROOT}` path expansion in `.lsp.json` — no generated wrappers or PATH dependencies required.
 
 ## License
 

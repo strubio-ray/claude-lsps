@@ -77,17 +77,6 @@
       "author": {
         "name": "strubio-ray"
       }
-    },
-    {
-      "name": "yaml-language-server",
-      "version": "1.1.0",
-      "source": "./yaml-language-server",
-      "description": "YAML language server",
-      "category": "development",
-      "tags": ["yaml", "lsp"],
-      "author": {
-        "name": "strubio-ray"
-      }
     }
   ]
 }
