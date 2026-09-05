@@ -2,12 +2,41 @@
   "linter": {
     "rules": {
       "complexity": {
-        // Deferred to the Phase E semantic-conversion sweep.
-        "useOptionalChain": "off"
+        "noExtraBooleanCast": "error",
+        "noUselessCatch": "error",
+        "noUselessCatchBinding": "error",
+        "noUselessConstructor": "error",
+        "noUselessContinue": "error",
+        "noUselessEmptyExport": "error",
+        "noUselessFragments": "error",
+        "noUselessLoneBlockStatements": "error",
+        "noUselessRename": "error",
+        "noUselessStringConcat": "error",
+        "noUselessSwitchCase": "error",
+        "noUselessTernary": "error",
+        "noUselessThisAlias": "error",
+        "noUselessUndefined": "error",
+        "noUselessUndefinedInitialization": "error",
+        "useIndexOf": "error",
+        "useOptionalChain": "error",
+        "useSimplifiedLogicExpression": "error"
+      },
+      "correctness": {
+        "noUnusedFunctionParameters": "error",
+        "noUnusedImports": "error",
+        "noUnusedPrivateClassMembers": "error",
+        "noUnusedVariables": "error"
+      },
+      "style": {
+        "noInferrableTypes": "error",
+        "noUselessElse": "error",
+        "useCollapsedElseIf": "error",
+        "useTemplate": "error"
       },
       "suspicious": {
         // Proxy and driver console output is the tool interface.
-        "noConsole": "off"
+        "noConsole": "off",
+        "noEmptyBlock": "error"
       }
     }
   }

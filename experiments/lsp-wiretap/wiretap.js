@@ -98,7 +98,7 @@ function describe(msg, bodyLen) {
   if (msg.error) rec.error = { code: msg.error.code, message: msg.error.message };
 
   const p = msg.params;
-  const td = p && p.textDocument;
+  const td = p?.textDocument;
   if (td) {
     if (td.uri) rec.uri = td.uri;
     if (td.version !== undefined) rec.version = td.version;

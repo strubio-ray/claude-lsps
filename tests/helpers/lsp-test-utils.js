@@ -9,7 +9,7 @@ function requireEnv() {
   const ROOT_DIR = process.env.ROOT_DIR;
   const TMP_DIR = process.env.TMP_DIR;
   const TESTS_DIR = process.env.TESTS_DIR;
-  if (!ROOT_DIR || !TMP_DIR || !TESTS_DIR) {
+  if (!(ROOT_DIR && TMP_DIR && TESTS_DIR)) {
     console.error('ROOT_DIR/TMP_DIR/TESTS_DIR must be exported');
     process.exit(2);
   }
@@ -136,7 +136,7 @@ async function _killGracefully(child, graceMs = 750) {
 }
 
 function dispatch(scenarios, name) {
-  if (!name || !scenarios[name]) {
+  if (!(name && scenarios[name])) {
     console.error(`unknown scenario: ${name}`);
     console.error('available:', Object.keys(scenarios).join(', '));
     process.exit(2);
@@ -152,10 +152,10 @@ function dispatch(scenarios, name) {
     try {
       await scenarios[name](setProxy);
     } catch (err) {
-      console.error(err && err.stack ? err.stack : String(err));
+      console.error(err?.stack ? err.stack : String(err));
       exitCode = 1;
     } finally {
-      await Promise.all(activeProxies.map((p) => _killGracefully(p && p.child)));
+      await Promise.all(activeProxies.map((p) => _killGracefully(p?.child)));
       process.exit(exitCode);
     }
   })();

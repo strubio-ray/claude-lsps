@@ -189,7 +189,7 @@ async function main() {
         if (r.refresh != null) refresh.push(r.refresh);
         process.stderr.write('.');
       } catch (e) {
-        err = e && e.message ? e.message : String(e);
+        err = e?.message ? e.message : String(e);
         process.stderr.write('x');
       }
     }
@@ -219,7 +219,7 @@ async function main() {
       continue;
     }
     const diag = r.note ? r.note : cell(r.firstDiag);
-    let line = `${pad(r.plugin)}${col(cell(r.ready))}${col(diag)}${col(r.refresh && r.refresh.length ? cell(r.refresh) : '—')}`;
+    let line = `${pad(r.plugin)}${col(cell(r.ready))}${col(diag)}${col(r.refresh?.length ? cell(r.refresh) : '—')}`;
     if (r.err) line += `   ! ${r.err}`;
     console.log(line);
   }
@@ -229,6 +229,6 @@ async function main() {
 main()
   .then(() => process.exit(0))
   .catch((e) => {
-    console.error(e && e.stack ? e.stack : String(e));
+    console.error(e?.stack ? e.stack : String(e));
     process.exit(1);
   });

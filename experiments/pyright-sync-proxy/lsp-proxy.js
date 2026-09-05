@@ -69,7 +69,7 @@ if (!Array.isArray(config.server) || config.server.length === 0) {
 
 const SERVER_CMD = config.server[0];
 const SERVER_ARGS = config.server.slice(1);
-const POLL_MS = Math.max(50, (config.sync && config.sync.pollMs) || 300);
+const POLL_MS = Math.max(50, config.sync?.pollMs || 300);
 
 // -- Framing -----------------------------------------------------------------
 
@@ -77,7 +77,7 @@ const HEADER_DELIM = Buffer.from('\r\n\r\n');
 const CONTENT_LENGTH_RE = /^content-length:\s*(\d+)\s*$/im;
 
 function writeMessage(stream, obj) {
-  if (!stream || !stream.writable) return;
+  if (!stream?.writable) return;
   const buf = Buffer.from(JSON.stringify(obj));
   stream.write(`Content-Length: ${buf.length}\r\n\r\n`);
   stream.write(buf);
@@ -176,10 +176,10 @@ function drainClient() {
 }
 
 function observe(msg) {
-  const td = msg.params && msg.params.textDocument;
+  const td = msg.params?.textDocument;
   switch (msg.method) {
     case 'textDocument/didOpen': {
-      if (!td || !td.uri) return;
+      if (!td?.uri) return;
       const p = toPath(td.uri);
       open.set(td.uri, {
         version: typeof td.version === 'number' ? td.version : 1,
@@ -196,7 +196,7 @@ function observe(msg) {
       // (Claude Code didChanges its own Edit-tool writes but never syncs
       // out-of-band disk edits, so permanent deferral would reopen the stale
       // window on any document the client ever edited.)
-      if (!td || !td.uri) return;
+      if (!td?.uri) return;
       const st = open.get(td.uri);
       if (!st) return;
       if (typeof td.version === 'number' && td.version > st.version) {
@@ -218,7 +218,7 @@ function observe(msg) {
       break;
     }
     case 'textDocument/didClose': {
-      if (td && td.uri) open.delete(td.uri);
+      if (td?.uri) open.delete(td.uri);
       break;
     }
     default:

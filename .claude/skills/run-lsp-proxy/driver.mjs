@@ -119,7 +119,7 @@ const stubEnv = LIVE
 // ---------------------------------------------------------------------------
 console.log(`▶ plugin      : ${PLUGIN}`);
 console.log(`▶ proxy       : ${PROXY}`);
-console.log(`▶ server      : ${LIVE ? cfg.server.join(' ') + '  (LIVE)' : 'stub-server.js'}`);
+console.log(`▶ server      : ${LIVE ? `${cfg.server.join(' ')}  (LIVE)` : 'stub-server.js'}`);
 console.log(`▶ blocked     : ${cfg.blocked.join(', ')}`);
 console.log(`▶ warmup      : ${cfg.warmup ? cfg.warmup.extensions.join(',') : '(none)'}`);
 console.log(`▶ workRoot    : ${workRoot}`);
@@ -168,7 +168,7 @@ const BLOCKED_METHOD = 'textDocument/references';
 const results = [];
 function check(name, ok, detail) {
   results.push({ name, ok });
-  console.log(`  ${ok ? '✓' : '✗'} ${name}${detail ? '  — ' + detail : ''}`);
+  console.log(`  ${ok ? '✓' : '✗'} ${name}${detail ? `  — ${detail}` : ''}`);
 }
 
 async function main() {
@@ -180,11 +180,7 @@ async function main() {
     params: { processId: process.pid, rootUri, capabilities: {} },
   });
   const initResp = await waitForId(1);
-  check(
-    'initialize forwarded & answered',
-    !!(initResp.result && initResp.result.capabilities),
-    'got capabilities',
-  );
+  check('initialize forwarded & answered', !!initResp.result?.capabilities, 'got capabilities');
 
   send({ jsonrpc: '2.0', method: 'initialized', params: {} });
   await wait(300); // let regal warmup fire (setImmediate → didOpen burst)
@@ -195,7 +191,7 @@ async function main() {
     id: 2,
     method: BLOCKED_METHOD,
     params: {
-      textDocument: { uri: rootUri + '/x' },
+      textDocument: { uri: `${rootUri}/x` },
       position: { line: 0, character: 0 },
       context: { includeDeclaration: true },
     },
@@ -212,7 +208,7 @@ async function main() {
     jsonrpc: '2.0',
     id: 3,
     method: 'textDocument/hover',
-    params: { textDocument: { uri: rootUri + '/x' }, position: { line: 0, character: 0 } },
+    params: { textDocument: { uri: `${rootUri}/x` }, position: { line: 0, character: 0 } },
   });
   if (!LIVE) {
     const hoverResp = await waitForId(3);
