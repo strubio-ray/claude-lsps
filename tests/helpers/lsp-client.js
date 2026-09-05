@@ -39,7 +39,7 @@ const SERVER_REQUEST_AUTOACKS = {
   // which is spec-violating but works for the servers they wrap; the test
   // client keeps the spec-compliant shape so pyright/vtsls direct-spawn
   // scenarios don't trip on the proxy bug. (See PR review finding E3.)
-  'workspace/configuration': (p) => (p && p.items ? p.items.map(() => null) : []),
+  'workspace/configuration': (p) => (p?.items ? p.items.map(() => null) : []),
 };
 
 const DEFAULT_CAPS = {
@@ -123,9 +123,7 @@ class LspClient {
         for (const p of this._pending.values()) {
           clearTimeout(p.timer);
           p.reject(
-            new Error(
-              `LSP process exited (code=${code}, signal=${signal}) ` + `with pending request`,
-            ),
+            new Error(`LSP process exited (code=${code}, signal=${signal}) with pending request`),
           );
         }
         this._pending.clear();
@@ -210,9 +208,9 @@ class LspClient {
       }
       // Server-initiated notification.
       if (msg.method === 'textDocument/publishDiagnostics') {
-        const uri = msg.params && msg.params.uri;
+        const uri = msg.params?.uri;
         if (!uri) return;
-        this._diagsByUri.set(uri, (msg.params && msg.params.diagnostics) || []);
+        this._diagsByUri.set(uri, msg.params?.diagnostics || []);
         this._lastPublishAt.set(uri, Date.now());
         this._publishSeq += 1;
         this._lastPublishSeq.set(uri, this._publishSeq);
@@ -221,12 +219,12 @@ class LspClient {
     } catch (err) {
       // A bug in this handler (or a malformed message that slipped past the
       // guards above) must not abort the test process. Log + drop.
-      process.stderr.write(`[lsp-client] _handle error: ${(err && err.stack) || err}\n`);
+      process.stderr.write(`[lsp-client] _handle error: ${err?.stack || err}\n`);
     }
   }
 
   _send(obj) {
-    if (!this.child || !this.child.stdin || !this.child.stdin.writable) return;
+    if (!this.child?.stdin?.writable) return;
     const body = Buffer.from(JSON.stringify(obj));
     try {
       this.child.stdin.write(`Content-Length: ${body.length}\r\n\r\n`);
@@ -283,7 +281,7 @@ class LspClient {
   }
 
   hasPullDiagnostics() {
-    return !!(this._serverCaps && this._serverCaps.diagnosticProvider);
+    return !!this._serverCaps?.diagnosticProvider;
   }
 
   isAlive() {
@@ -357,7 +355,7 @@ class LspClient {
       // means the server isn't actually answering — fail loud rather than
       // silently treating it as "no diagnostics".
       throw new Error(
-        `pull diagnostic for ${uri} returned kind=${JSON.stringify(r.kind)}; ` + `expected "full"`,
+        `pull diagnostic for ${uri} returned kind=${JSON.stringify(r.kind)}; expected "full"`,
       );
     }
     const t = timeout ?? PUSH_TIMEOUT_MS;

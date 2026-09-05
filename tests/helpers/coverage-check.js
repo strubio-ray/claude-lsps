@@ -8,7 +8,7 @@ const { fileURLToPath } = require('node:url');
 
 const ROOT_DIR = process.env.ROOT_DIR;
 const COV_DIR = process.env.NODE_V8_COVERAGE;
-if (!ROOT_DIR || !COV_DIR) {
+if (!(ROOT_DIR && COV_DIR)) {
   console.error('ROOT_DIR and NODE_V8_COVERAGE must be set');
   process.exit(2);
 }

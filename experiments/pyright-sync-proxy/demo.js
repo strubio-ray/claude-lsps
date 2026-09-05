@@ -196,6 +196,6 @@ async function main() {
 }
 
 main().catch((e) => {
-  console.error(e && e.stack ? e.stack : String(e));
+  console.error(e?.stack ? e.stack : String(e));
   process.exit(1);
 });

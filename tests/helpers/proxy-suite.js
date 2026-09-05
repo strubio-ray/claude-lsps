@@ -418,7 +418,8 @@ async function regalPassthroughParity(setProxy) {
 
   const resp = parseFrames(proxy.stdoutBuf()).find((f) => f.body.id === 11);
   assert(
-    resp && resp.body.result && resp.body.result.contents === 'hover-result',
+    resp?.body.result && resp.body.result.contents === 'hover-result',
+    // biome-ignore lint/complexity/useOptionalChain: Preserve null in the emitted failure diagnostic.
     `regal proxy passthrough failed: ${JSON.stringify(resp && resp.body)}`,
   );
 

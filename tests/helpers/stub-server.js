@@ -32,7 +32,7 @@ function appendRaw(buf) {
   if (LOG_DIR) fs.appendFileSync(path.join(LOG_DIR, 'recv.log'), buf);
 }
 function appendJson(obj) {
-  if (LOG_DIR) fs.appendFileSync(path.join(LOG_DIR, 'recv.jsonl'), JSON.stringify(obj) + '\n');
+  if (LOG_DIR) fs.appendFileSync(path.join(LOG_DIR, 'recv.jsonl'), `${JSON.stringify(obj)}\n`);
 }
 
 function frame(body) {
@@ -126,7 +126,7 @@ for (const sig of ['SIGTERM', 'SIGINT']) {
   process.on(sig, () => {
     if (SIGNAL_LOG) {
       try {
-        fs.appendFileSync(SIGNAL_LOG, sig + '\n');
+        fs.appendFileSync(SIGNAL_LOG, `${sig}\n`);
       } catch {}
     }
     process.exit(sig === 'SIGINT' ? 130 : 143);

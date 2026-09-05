@@ -93,10 +93,7 @@ const SERVER_CMD = config.server[0];
 const SERVER_ARGS = config.server.slice(1);
 const BLOCKED_METHODS = new Set(config.blocked || []);
 const WARMUP = config.warmup || null;
-const SYNC =
-  config.sync === false
-    ? null
-    : { pollMs: Math.max(50, (config.sync && config.sync.pollMs) || 300) };
+const SYNC = config.sync === false ? null : { pollMs: Math.max(50, config.sync?.pollMs || 300) };
 const LOG_PREFIX = `[lsp-proxy:${SERVER_CMD}]`;
 
 // ---------------------------------------------------------------------------
@@ -137,7 +134,7 @@ const openDocs = new Map();
 
 function toPath(uri) {
   try {
-    return uri && uri.startsWith('file:') ? fileURLToPath(uri) : null;
+    return uri?.startsWith('file:') ? fileURLToPath(uri) : null;
   } catch {
     return null;
   }
@@ -390,7 +387,7 @@ function pollOpenDocs() {
 }
 
 const pollTimer = SYNC ? setInterval(pollOpenDocs, SYNC.pollMs) : null;
-if (pollTimer && pollTimer.unref) pollTimer.unref();
+if (pollTimer?.unref) pollTimer.unref();
 
 // ---------------------------------------------------------------------------
 // Warmup: file discovery
@@ -437,7 +434,7 @@ function findFiles(rootDir, extensions, excludeDirs) {
  * warmup-opened file must refresh its diagnostics too.
  */
 function warmupServer(rootDir) {
-  if (!WARMUP || !Array.isArray(WARMUP.extensions) || WARMUP.extensions.length === 0) {
+  if (!(WARMUP && Array.isArray(WARMUP.extensions)) || WARMUP.extensions.length === 0) {
     return;
   }
 
@@ -580,7 +577,7 @@ function drainServerBuffer() {
 
     // Detect the initialize response (has "capabilities" in result).
     // We use this + the subsequent "initialized" notification to trigger warmup.
-    if (msg.result && msg.result.capabilities) {
+    if (msg.result?.capabilities) {
       initializeResponseSeen = true;
     }
 
@@ -658,7 +655,7 @@ function drainBuffer() {
     // version-rebased or converted to a reopen (outFrame rewritten/nulled);
     // a client didClose for a document the proxy already closed server-side
     // (deleted file) is swallowed rather than closed twice.
-    const td = msg.params && msg.params.textDocument;
+    const td = msg.params?.textDocument;
     let outFrame = rawMessage;
     if (msg.method === 'textDocument/didOpen' && td && td.uri) {
       const st = openDocs.get(td.uri);
@@ -700,7 +697,7 @@ function drainBuffer() {
     } else if (msg.method === 'textDocument/didClose' && td && td.uri) {
       const st = openDocs.get(td.uri);
       openDocs.delete(td.uri);
-      if (st && st.closed) outFrame = null;
+      if (st?.closed) outFrame = null;
     }
 
     // After "initialized" notification, trigger warmup.
