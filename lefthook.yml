@@ -29,3 +29,4 @@ remotes:
       - lefthook/base.yml
       - lefthook/ts.yml
       - lefthook/biome.yml
+      - lefthook/biome-native.yml
