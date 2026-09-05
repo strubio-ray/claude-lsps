@@ -26,36 +26,36 @@
       "style": {
         "useImportType": "error",
         "useNodejsImportProtocol": "error",
-        "noInferrableTypes": "error",
         "noUselessElse": "error",
+        "noInferrableTypes": "error",
         "useCollapsedElseIf": "error",
         "useTemplate": "error"
       },
       "complexity": {
-        "noExtraBooleanCast": "error",
         "noUselessCatch": "error",
-        "noUselessCatchBinding": "error",
-        "noUselessConstructor": "error",
-        "noUselessContinue": "error",
-        "noUselessEmptyExport": "error",
-        "noUselessFragments": "error",
-        "noUselessLoneBlockStatements": "error",
-        "noUselessRename": "error",
-        "noUselessStringConcat": "error",
-        "noUselessSwitchCase": "error",
         "noUselessTernary": "error",
-        "noUselessThisAlias": "error",
-        "noUselessUndefined": "error",
+        "noUselessSwitchCase": "error",
         "noUselessUndefinedInitialization": "error",
-        "useIndexOf": "error",
+        "noUselessLoneBlockStatements": "error",
+        "noUselessConstructor": "error",
+        "noUselessRename": "error",
+        "noUselessEmptyExport": "error",
+        "noUselessContinue": "error",
+        "noExtraBooleanCast": "error",
+        "noUselessCatchBinding": "error",
+        "noUselessStringConcat": "error",
+        "noUselessUndefined": "error",
+        "noUselessFragments": "error",
+        "noUselessThisAlias": "error",
+        "useSimplifiedLogicExpression": "error",
         "useOptionalChain": "error",
-        "useSimplifiedLogicExpression": "error"
+        "useIndexOf": "error"
       },
       "correctness": {
-        "noUnusedFunctionParameters": "error",
+        "noUnusedVariables": "error",
         "noUnusedImports": "error",
-        "noUnusedPrivateClassMembers": "error",
-        "noUnusedVariables": "error"
+        "noUnusedFunctionParameters": "error",
+        "noUnusedPrivateClassMembers": "error"
       }
     }
   },
