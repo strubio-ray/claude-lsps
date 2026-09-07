@@ -41,7 +41,7 @@ jobs:
     if: >-
       github.event_name == 'schedule' && github.event.schedule == '0 9 * * 1'
       || github.event_name == 'workflow_dispatch'
-    uses: Rubio-Enterprises/.github/.github/workflows/secret-scan.yml@390c7733cde8aac21bf8ef84dfa32ebba38355a3 # v3
+    uses: Rubio-Enterprises/.github/.github/workflows/secret-scan.yml@083a18b5fd4ae40bd54a67296c016fbf998ab7e5 # v3
     with: { mode: trufflehog }
 
   lint-hooks:
@@ -49,7 +49,7 @@ jobs:
     # diffs). Catches drift in hook-tool pins / PATH wiring that local commits
     # would otherwise hit first. PR-only; push/schedule paths skip.
     if: github.event_name == 'pull_request' && github.event.action != 'edited'
-    uses: Rubio-Enterprises/.github/.github/workflows/lint-hooks.yml@390c7733cde8aac21bf8ef84dfa32ebba38355a3 # v3
+    uses: Rubio-Enterprises/.github/.github/workflows/lint-hooks.yml@083a18b5fd4ae40bd54a67296c016fbf998ab7e5 # v3
     # secrets: inherit — the reusable workflow's private-Go-module mint step
     # (consumers setting GO_PRIVATE_MODULE_REPOS) reads the org secrets
     # STANDARDS_READER_APP_ID / STANDARDS_READER_APP_PRIVATE_KEY; a called
