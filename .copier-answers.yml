@@ -1,6 +1,6 @@
 # Changes here will be overwritten by Copier; NEVER edit this file manually.
-_commit: template/v1.55.92
-_rubio_template_version: template/v1.55.92
+_commit: template/v1.55.95
+_rubio_template_version: template/v1.55.95
 _src_path: https://github.com/Rubio-Enterprises/standards.git
 container_registry: ghcr.io/Rubio-Enterprises
 default_branch: main
@@ -19,6 +19,7 @@ has_homebrew_formulae: false
 has_javascript: true
 has_playwright: false
 has_python: false
+has_ruby: false
 has_rust: false
 has_swift: false
 has_typescript: false
