@@ -594,7 +594,8 @@ fi
 # ends up missing).
 #
 # EVERY warm step is gated on its COMMITTED MANIFEST (go.mod, Cargo.toml,
-# pyproject.toml, requirements.txt, a lockfile), never on `command -v` alone.
+# Gemfile + Gemfile.lock, pyproject.toml, requirements.txt, a lockfile), never
+# on `command -v` alone.
 # A facet says the repo COULD carry that stack; only the manifest says this
 # checkout actually does. Keying on PATH instead is what made the node fallback
 # run `pnpm install` at a manifest-less root on every snapshot build, and it is
